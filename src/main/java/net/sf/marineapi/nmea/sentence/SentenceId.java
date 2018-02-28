@@ -110,7 +110,9 @@ public enum SentenceId {
 	/** Wind speed and direction */
     MWD,
 	/** UTC time and date with local time zone offset */
-	ZDA;
+	ZDA,
+	 /** NAVTEX Received Message */
+	NRX;
 
 	/**
 	 * Parses the sentence id from specified sentence String and returns a
