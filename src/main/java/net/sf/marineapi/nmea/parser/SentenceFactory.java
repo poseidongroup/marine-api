@@ -295,5 +295,6 @@ public final class SentenceFactory {
 		registerParser("ZDA", ZDAParser.class);
 		registerParser("MDA", MDAParser.class);
 		registerParser("MWD", MWDParser.class);
+		registerParser("NRX", NRXParser.class);
 	}
 }

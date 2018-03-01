@@ -68,6 +68,8 @@ public enum TalkerId {
 	CM,
     /** Channel Pilot (Navicom Dynamics proprietary) */
     CP,
+	/** Communications - Data Receiver */
+	CR,
 	/** Communications - Satellite */
 	CS,
 	/** Communications - Radio-Telephone (MF/HF) */
