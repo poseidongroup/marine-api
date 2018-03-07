@@ -1,6 +1,6 @@
 /*
- * TargetStatus.java
- * Copyright (C) 2014 Johan Bergkvist
+ * ReservedCharacters.java
+ * Copyright (C) 2018 Raymond Dahlberg
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>

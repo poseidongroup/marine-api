@@ -1,3 +1,23 @@
+/*
+ * NavtexExample.java
+ * Copyright (C) 2018 Raymond Dahlberg
+ *
+ * This file is part of Java Marine API.
+ * <http://ktuukkan.github.io/marine-api/>
+ *
+ * Java Marine API is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Java Marine API is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+ * for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.sf.marineapi.example;
 
 import net.sf.marineapi.nmea.parser.SentenceFactory;
@@ -50,25 +70,25 @@ public class NavtexExample {
 		// Split message text so each sentence does not exceed the maximum length. The first sentence can have
 		// less text since it need data in all fields, while the rest of the sentences can use 0 fields for data
 		// already presented in the first sentence.
-		ArrayList<String> messageSplitted = new ArrayList<>();
+		ArrayList<String> messageChunks = new ArrayList<>();
 
 		int maxTextLengthFirstSentence = 28;
 		int maxTextLengthSentence = 57;
 		int index = 0;
 		int endIndex = maxTextLengthFirstSentence + 1;
-		messageSplitted.add(encodedMessage.substring(index, endIndex));
+		messageChunks.add(encodedMessage.substring(index, endIndex));
 		index = endIndex;
 		while (index < encodedMessage.length()) {
 			endIndex = index + maxTextLengthSentence + 1;
 			if (endIndex >= encodedMessage.length()) {
 				endIndex = encodedMessage.length();
 			}
-			messageSplitted.add(encodedMessage.substring(index, endIndex));
+			messageChunks.add(encodedMessage.substring(index, endIndex));
 			index = endIndex;
 		}
 
-		System.out.println("\n\nMessage splitted into the following sentences: (" + messageSplitted.size() + ")");
-		for (String s : messageSplitted) {
+		System.out.println("\n\nMessage split into the following sentences: (" + messageChunks.size() + ")");
+		for (String s : messageChunks) {
 			System.out.println(s);
 		}
 
@@ -77,7 +97,7 @@ public class NavtexExample {
 		System.out.println("\nNRX sentences for the whole message:\n");
 		ArrayList<String> nrxMessages = new ArrayList<>();
 
-		for (int i = 0; i < messageSplitted.size(); i++) {
+		for (int i = 0; i < messageChunks.size(); i++) {
 			nrx.reset();
 			if (i == 0) {
 				nrx.setMessageCode("UA98");
@@ -88,10 +108,10 @@ public class NavtexExample {
 				nrx.setTotalNumberOfBadCharacters(0);
 				nrx.setStatus(DataStatus.ACTIVE);
 			}
-			nrx.setNumberOfSentences(messageSplitted.size());
+			nrx.setNumberOfSentences(messageChunks.size());
 			nrx.setSentenceNumber(i + 1);
 			nrx.setSequentialId(0);
-			nrx.setMessageBody(messageSplitted.get(i));
+			nrx.setMessageBody(messageChunks.get(i));
 			System.out.println(nrx.toSentence());
 			nrxMessages.add(nrx.toSentence());
 		}

@@ -1,5 +1,5 @@
 /*
- * ZDAParser.java
+ * NRXParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
