@@ -69,7 +69,10 @@ public interface NRXSentence extends TimeSentence, DateSentence {
 	int getSequentialId();
 
 	/**
-	 * Get the NAVTEX message code
+	 * Get the NAVTEX message code - a combination of the station, message type and message serial number: ABNN
+	 * - A = Transmitter coverage area
+	 * - B = Message subject indicator
+	 * - NN = 01..99 Serial number. 00 Used for high priority messages.
 	 *
 	 * @return message code
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -164,10 +167,12 @@ public interface NRXSentence extends TimeSentence, DateSentence {
 	void setSequentialId(int sequentialId);
 
 	/**
-	 * Set NAVTEX message code
-	 * @param messageCode string composed of transmitter coverage area, type of message and serial number.
+	 * Set NAVTEX message code - a combination of the station, message type and message serial number.
+	 * @param transmitterCoverageArea character representing the transmitter station
+	 * @param subject character for message subject type
+	 * @param serialNumber serial number for message
 	 */
-	void setMessageCode(String messageCode);
+	void setMessageCode(char transmitterCoverageArea, char subject, int serialNumber);
 
 	/**
 	 * Set frequency table index from 0 to 9.

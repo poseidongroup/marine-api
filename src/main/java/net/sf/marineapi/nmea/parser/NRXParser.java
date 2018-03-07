@@ -178,8 +178,15 @@ class NRXParser extends SentenceParser implements NRXSentence {
 	}
 
 	@Override
-	public void setMessageCode(String messageCode) {
-		setStringValue(NAVTEX_MESSAGE_CODE, messageCode);
+	public void setMessageCode(char transmitterCoverageArea, char subject, int serialNumber) {
+		StringBuilder messageCodeBuilder = new StringBuilder();
+		messageCodeBuilder.append(transmitterCoverageArea);
+		messageCodeBuilder.append(subject);
+		if (serialNumber < 0 || serialNumber > 99) {
+			throw new IllegalArgumentException("serialNumber need to be from 0 to 99");
+		}
+		messageCodeBuilder.append(String.format("%02d", serialNumber));
+		setStringValue(NAVTEX_MESSAGE_CODE, messageCodeBuilder.toString());
 	}
 
 	@Override

@@ -100,7 +100,8 @@ public class NavtexExample {
 		for (int i = 0; i < messageChunks.size(); i++) {
 			nrx.reset();
 			if (i == 0) {
-				nrx.setMessageCode("UA98");
+			    nrx.setSequentialId(98);
+				nrx.setMessageCode('U', 'A', 98);
 				nrx.setFrequencyTableIndex(1);
 				nrx.setTime(new Time(10, 23, 8.0));
 				nrx.setDate(new Date(2018, 3, 1));
